@@ -45,4 +45,12 @@ public class BoardService {
             return null;
         }
     }
+
+    public BoardDTO update(BoardDTO boardDTO) {
+        // spring boot jpa에서는 save()가 update insert 둘다 해준다.
+        // 구분하는 방법은 ? id값이 존재하면 update, 존재하지 않으면 insert
+        BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO);
+        boardRepository.save(boardEntity);
+        return findById(boardDTO.getId());
+    }
 }
