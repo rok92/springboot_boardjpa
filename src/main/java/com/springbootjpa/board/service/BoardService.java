@@ -22,6 +22,7 @@ public class BoardService {
         BoardEntity boardEntity = BoardEntity.toSaveEntity(boardDTO);
         boardRepository.save(boardEntity);
     }
+    @Transactional
     public List<BoardDTO> findAll() {
         List<BoardEntity> boardEntityList = boardRepository.findAll();
         List<BoardDTO> boardDTOList = new ArrayList<>();
@@ -52,5 +53,9 @@ public class BoardService {
         BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO);
         boardRepository.save(boardEntity);
         return findById(boardDTO.getId());
+    }
+
+    public void delete(Long id) {
+        boardRepository.deleteById(id);
     }
 }
